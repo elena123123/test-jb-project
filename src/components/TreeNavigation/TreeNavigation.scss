@@ -1,0 +1,50 @@
+@import '../config';
+.nav-tree {
+  color: #343434;
+  .nav-tree__block {
+    list-style-type: none;
+    padding: 0;
+    .nav-tree__node {
+      display: flex;
+      padding: $space-small/2 0;
+      cursor: pointer;
+      letter-spacing: -0.1px;
+      @for $count from 0 through 7 {
+        &.level-#{$count} {
+          padding-left: $count * $space-small;
+        }
+      }
+      :hover {
+        text-decoration: underline;
+      }
+      &.nav-tree__node_selected {
+        background-color: $primary-color-medium;
+      }
+      .nav-tree__title {
+        padding-left: $space-big;
+        position: relative;
+        transition: 0.4s;
+        &.nav-tree__title_selected {
+          font-weight: bold;
+          transition: 0.4s;
+        }
+        .expand-button {
+          cursor: pointer;
+          height: 8px;
+          width: 8px;
+          position: absolute;
+          left: 14px;
+          top: 7px;
+          transition: 0.4s;
+          svg {
+            float: left;
+          }
+          &.expand-button_opened {
+            transform: rotate(-180deg);
+            transition: 0.4s;
+          }
+        }
+      }
+    }
+  }
+}

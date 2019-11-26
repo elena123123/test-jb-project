@@ -1,0 +1,11 @@
+@import '../config';
+
+.searchable-tree-menu {
+  height: 100%;
+  background-color: $primary-color-light;
+  border-right: 1px solid $primary-color-dark;
+  padding-top: $space-big;
+  .searchable-tree-menu__search-input {
+    width: calc(100% - 24px);
+  }
+}

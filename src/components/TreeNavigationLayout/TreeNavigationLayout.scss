@@ -1,0 +1,15 @@
+@import '../config';
+
+.tree-navigation-layout {
+  display: flex;
+  flex-direction: row;
+
+  .tree-navigation-layout__menu-container {
+    width: 300px;
+    min-height: 100vh;
+  }
+
+  .tree-navigation-layout__content-container {
+    flex: 1;
+  }
+}
