@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { requestMenuItems } from '../../api/navigationMenu';
 import TreeNavigation from '../TreeNavigation/TreeNavigation';
 import DebouncedSearchInput from '../DebouncedSearchInput/DebouncedSearchInput';
@@ -40,21 +40,26 @@ export interface MenuItems {
 
 const SearchableTreeMenu: React.FC = () => {
   const [text, setText] = useState('');
-
+  const [activeId, setActiveId] = useState('touroftheUI');
   const [menuItems, menuItemsLoading, menuItemsError] = useFetch(
     requestMenuItems,
-    { params: { text } },
+    { params: { text, activeId } },
     [text],
     initialMenu
   );
 
+  useEffect(() => {
+    if (text) {
+      setActiveId('');
+    }
+  }, [text]);
   const renderTree = () => {
     if (menuItemsLoading) {
       return <ListLoading />;
     } else if (menuItemsError) {
       return <div>Error</div>;
     } else {
-      return <TreeNavigation items={menuItems} activeId="touroftheUI" />;
+      return <TreeNavigation items={menuItems} activeId={activeId} />;
     }
   };
 

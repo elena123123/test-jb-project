@@ -54,7 +54,7 @@ const getTreeByText = text => {
     return Object.values(menu.entities.pages).forEach(item => {
       if (
         item.level === level &&
-        item.title.toLowerCase() === text.toLowerCase() &&
+        item.title.toLowerCase().includes(text.toLowerCase()) &&
         !filteredMenuItems.entities.pages[item.id]
       ) {
         filteredMenuItems.entities.pages[item.id] = { ...item, pages: [] };
@@ -84,8 +84,8 @@ const getTreeByText = text => {
 module.exports = function(app) {
   app.get('/json', (req, res) => {
     setTimeout(() => {
-      if (req.query.ID) {
-        res.json(getTreeWithActiveId(req.query.ID));
+      if (req.query.activeId) {
+        res.json(getTreeWithActiveId(req.query.activeId));
       } else if (req.query.text && req.query.text.length) {
         res.json(getTreeByText(req.query.text));
       } else {
